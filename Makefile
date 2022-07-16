@@ -1,15 +1,17 @@
 .PHONY:  setup
-clean:
+setup:
 	docker-compose up -d
+	docker-compose exec app bash -c "cd /var/www/laravel-project && composer install"
 	docker-compose exec app bash -c "cd /var/www/laravel-project && php -r \"copy('.env.example', '.env');\""
 	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan key:generate"
 
 .PHONY:  run
-clean:
+run:
 	docker-compose up -d
+	docker-compose exec app bash -c "cd /var/www/laravel-project && composer install"
 	
 .PHONY:  down
-clean:
+down:
 	docker-compose down
 	
 .PHONY: clean
