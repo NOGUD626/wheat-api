@@ -14,10 +14,19 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        $developer = ['user/read', 'user/write'];
+        $developer_csv = implode(',', $developer);
+
+        $admin = ['user/read', 'user/write'];
+        $admin_csv = implode(',', $admin);
+
+        $user = ['user/read'];
+        $user_csv = implode(',', $user);
+
         $role = array(
-            ['name'=> 'developer'],
-            ['name'=>'admin'],
-            ['name'=>'user']
+            ['name' => 'developer', 'grant' => $developer_csv],
+            ['name' => 'admin', 'grant' => $admin_csv],
+            ['name' => 'user', 'grant' => $user_csv]
         );
 
         DB::table('roles')->insert($role);
