@@ -23,12 +23,17 @@ class UserLoginController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         $firebaseId = $request->firebaseId;
-        $email = $request->email;
-        $name = $request->name;
 
         if(!$this->userLoginService->getExistUser($firebaseId)){
-            dd("ユーザが存在しない");
+    
+            return response()->json(
+                ['message' => 'Unauthorized'],
+                Response::HTTP_UNAUTHORIZED
+            );
+
         }
+
+        $this->userLoginService->getAffiliationList($firebaseId);
 
         exit();
     }
