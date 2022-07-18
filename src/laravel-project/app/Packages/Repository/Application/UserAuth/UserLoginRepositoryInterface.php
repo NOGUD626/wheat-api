@@ -16,5 +16,5 @@ interface UserLoginRepositoryInterface
      * @param string firebaseのユーザID
      * @return void
      */
-    public function getAffiliationList(String $firebaseId): void;
+    public function getAffiliationList(String $firebaseId): array;
 }
