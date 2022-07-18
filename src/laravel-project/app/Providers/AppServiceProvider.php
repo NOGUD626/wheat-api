@@ -3,6 +3,16 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Packages\Component\Transaction\TransactionInterface;
+use App\Packages\Component\Transaction\DbTransaction;
+
+// Service
+use App\Packages\Service\Application\UserAuth\UserLoginService;
+use App\Packages\Service\Application\UserAuth\UserLoginServiceInterface;
+
+// Repository
+use App\Packages\Repository\Application\UserAuth\UserLoginRepository;
+use App\Packages\Repository\Application\UserAuth\UserLoginRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(TransactionInterface::class, DbTransaction::class);
+        $this->app->bind(UserLoginServiceInterface::class, UserLoginService::class);
+        $this->app->bind(UserLoginRepositoryInterface::class, UserLoginRepository::class);
+        
     }
 
     /**
