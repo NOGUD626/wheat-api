@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Packages\Service\Application\UserAuth\UserLoginServiceInterface;
+use App\Packages\Service\Model\UserAuth\ComponeyListModel;
 
 class UserLoginController extends Controller
 {
@@ -16,7 +16,7 @@ class UserLoginController extends Controller
 
     public function __construct(
         UserLoginServiceInterface $userLoginService
-    ){
+    ) {
         $this->userLoginService = $userLoginService;
     }
 
@@ -24,17 +24,36 @@ class UserLoginController extends Controller
     {
         $firebaseId = $request->firebaseId;
 
-        if(!$this->userLoginService->getExistUser($firebaseId)){
-    
+        if (!$this->userLoginService->getExistUser($firebaseId)) {
+
             return response()->json(
                 ['message' => 'Unauthorized'],
                 Response::HTTP_UNAUTHORIZED
             );
-
         }
 
-        $this->userLoginService->getAffiliationList($firebaseId);
+        $companyList = $this->userLoginService->getAffiliationList($firebaseId);
 
-        exit();
+        $companyList = array_map(
+            function (ComponeyListModel $company) {
+                return [
+                    'id' => $company->getCompanyId(),
+                    'name' => $company->getCompanyName(),
+                    'address' => $company->getCompanyAddress(),
+                    'created_at' => $company->getCreatedAt(),
+                ];
+            },
+            $companyList
+        );
+
+        $token = $this->userLoginService->getAccessToken($firebaseId);
+
+        return response()->json(
+            [
+                'company_list' => $companyList,
+                'access-token' => $token
+            ],
+            Response::HTTP_OK
+        );
     }
 }
