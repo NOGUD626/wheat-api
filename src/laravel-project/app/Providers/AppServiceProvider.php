@@ -11,6 +11,8 @@ use App\Packages\Service\Application\UserAuth\UserLoginService;
 use App\Packages\Service\Application\UserAuth\UserLoginServiceInterface;
 
 // Repository
+use App\Packages\Repository\Application\UserAuth\UserLoginRepository;
+use App\Packages\Repository\Application\UserAuth\UserLoginRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(TransactionInterface::class, DbTransaction::class);
         $this->app->bind(UserLoginServiceInterface::class, UserLoginService::class);
+        $this->app->bind(UserLoginRepositoryInterface::class, UserLoginRepository::class);
         
     }
 
