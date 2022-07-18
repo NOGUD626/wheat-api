@@ -18,4 +18,9 @@ class UserLoginService implements UserLoginServiceInterface
     {
         return $this->userLoginRepository->getExistUser($firebaseId);
     }
+
+    public function getAffiliationList(String $firebaseId): void
+    {
+        $this->userLoginRepository->getAffiliationList($firebaseId);
+    }
 }

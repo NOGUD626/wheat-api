@@ -14,4 +14,14 @@ class UserLoginRepository implements UserLoginRepositoryInterface
         
         return $excistFlag;
     }
+
+    public function getAffiliationList(String $firebaseId): void
+    {
+        $companyList = DB::table('staff')
+        ->leftjoin('users', 'staff.user_id', '=', 'users.id')
+        ->leftjoin('companies', 'staff.company_id', '=', 'companies.id')
+        ->select('companies.id','companies.name','companies.address');
+        dd($companyList-> get());
+        exit();
+    }
 }
