@@ -20,6 +20,7 @@ class UserLoginRepository implements UserLoginRepositoryInterface
         $companyList = DB::table('staff')
         ->leftjoin('users', 'staff.user_id', '=', 'users.id')
         ->leftjoin('companies', 'staff.company_id', '=', 'companies.id')
+        ->where('users.uid',$firebaseId)
         ->select('companies.id','companies.name','companies.address');
         dd($companyList-> get());
         exit();
