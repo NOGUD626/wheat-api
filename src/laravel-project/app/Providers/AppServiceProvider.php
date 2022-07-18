@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Packages\Component\Transaction\TransactionInterface;
+use App\Packages\Component\Transaction\DbTransaction;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(TransactionInterface::class, DbTransaction::class);
     }
 
     /**
