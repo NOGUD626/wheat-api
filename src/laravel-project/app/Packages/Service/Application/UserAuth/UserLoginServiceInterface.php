@@ -12,9 +12,16 @@ interface UserLoginServiceInterface
     public function getExistUser(String $firebaseId): bool;
 
     /**
-     * ユーザがDB内に存在するかを返す
+     * ユーザの所属している会社のリストを返す
      * @param string firebaseのユーザID
      * @return void
      */
-    public function getAffiliationList(String $firebaseId): void;
+    public function getAffiliationList(String $firebaseId): array;
+
+    /**
+     * ユーザ認証用のアクセストークンを返す
+     * @param string firebaseのユーザID
+     * @return void
+     */
+    public function getAccessToken(String $firebaseId): string;
 }
