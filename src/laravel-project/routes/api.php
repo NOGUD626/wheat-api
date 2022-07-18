@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserAuth\UserSignInController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['firebase'])->group(function (){
-    Route::post('/user', UserController::class);
+    Route::post('/sighin', UserSignInController::class);
 });
