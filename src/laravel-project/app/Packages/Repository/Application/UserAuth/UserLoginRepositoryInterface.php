@@ -2,6 +2,8 @@
 
 namespace App\Packages\Repository\Application\UserAuth;
 
+use App\Models\User;
+
 interface UserLoginRepositoryInterface
 {
     /**
@@ -14,7 +16,21 @@ interface UserLoginRepositoryInterface
     /**
      * ユーザの所属している会社のリストを返す
      * @param string firebaseのユーザID
-     * @return void
+     * @return array
      */
     public function getAffiliationList(String $firebaseId): array;
+
+    /**
+     * ユーザ型を返す
+     * @param string firebaseのユーザID
+     * @return User
+     */
+    public function getUser(String $firebaseId): User;
+
+    /**
+     * 文字列を返す
+     * @param string firebaseのユーザID
+     * @return string
+     */
+    public function getAbility(String $firebaseId): array;
 }

@@ -4,6 +4,7 @@ namespace App\Packages\Repository\Application\UserAuth;
 
 use Illuminate\Support\Facades\DB;
 use App\Packages\Repository\Model\UserAuth\ComponeyListModel;
+use App\Models\User;
 
 class UserLoginRepository implements UserLoginRepositoryInterface
 {
@@ -26,6 +27,7 @@ class UserLoginRepository implements UserLoginRepositoryInterface
             ->where('status_type.flag', true)
             ->select('companies.id', 'companies.name', 'companies.address', 'companies.created_at')
             ->get()->toArray();
+
         return array_map(
             function ($company): ComponeyListModel {
                 return new ComponeyListModel(
@@ -37,5 +39,19 @@ class UserLoginRepository implements UserLoginRepositoryInterface
             },
             $companyList
         );
+    }
+
+    public function getUser(String $firebaseId): User
+    {
+        $user = User::where('uid', '=', $firebaseId)->first();
+
+        return $user;
+    }
+
+    public function getAbility(String $firebaseId): array
+    {
+        $user_str = User::where('uid', '=', $firebaseId)->first()->role->grant;
+        $role = explode(',', $user_str);
+        return $role;
     }
 }
