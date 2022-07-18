@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class UserLoginRepository implements UserLoginRepositoryInterface
 {
-    public function getExistUser(String $firebaseId): void
+    public function getExistUser(String $firebaseId): bool
     {
-        dd($firebaseId);
+        $excistFlag = DB::table('users')
+        ->where('uid', $firebaseId)
+        ->exists();
+        
+        return $excistFlag;
     }
 }

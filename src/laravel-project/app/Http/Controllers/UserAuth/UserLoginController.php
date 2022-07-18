@@ -26,29 +26,10 @@ class UserLoginController extends Controller
         $email = $request->email;
         $name = $request->name;
 
-        $this->userLoginService->getExistUser($firebaseId);
+        if(!$this->userLoginService->getExistUser($firebaseId)){
+            dd("ユーザが存在しない");
+        }
 
-        // $user = User::where('uid', $firebaseId);
-
-        // if ($user->get()->isEmpty()) {
-
-        //     $user = new User();
-        //     $user->name = $name;
-        //     $user->uid = $firebaseId;
-        //     $user->email = $email;
-        //     $user->role_id = 1;
-        //     $user->status_id = 1;
-        //     $user->save();
-
-        //     return response()->json(
-        //         ['message' => 'Completion of registration'],
-        //         Response::HTTP_CREATED
-        //     );
-        // };
-
-        // return response()->json(
-        //     ['message' => 'Already registered'],
-        //     Response::HTTP_OK
-        // );
+        exit();
     }
 }

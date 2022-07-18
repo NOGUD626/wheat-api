@@ -14,13 +14,8 @@ class UserLoginService implements UserLoginServiceInterface
         $this->userLoginRepository = $userLoginRepository;
     }
 
-    /**
-     * 案件を全件取得する
-     *
-     * @return Boolean
-     */
-    public function getExistUser(String $firebaseId):void
+    public function getExistUser(String $firebaseId):bool
     {
-        $this->userLoginRepository->getExistUser($firebaseId);
+        return $this->userLoginRepository->getExistUser($firebaseId);
     }
 }

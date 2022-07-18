@@ -6,8 +6,8 @@ interface UserLoginServiceInterface
 {
     /**
      * ユーザがDB内に存在するかを返す
-     *
-     * @return boolean　
+     * @param string firebaseのユーザID
+     * @return boolean 存在するかのステータスフラグ
      */
-    public function getExistUser(String $firebaseId): void;
+    public function getExistUser(String $firebaseId): bool;
 }
