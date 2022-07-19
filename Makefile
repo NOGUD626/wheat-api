@@ -33,3 +33,14 @@ clean:
 migration:
 	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan migrate"
 	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan db:seed"
+
+.PHONY: dev-setup
+dev-setup:
+    docker-compose up -d app
+    docker-compose up -d nginx
+    docker-compose exec app bash -c "cd /var/www/laravel-project && composer install"
+    docker-compose exec app bash -c "cd /var/www/laravel-project && php -r \"copy('.env.dev_example', '.env');\""
+	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan key:generate"
+    @make cache-clear
+    @make migration
+    @make down
