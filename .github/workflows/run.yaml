@@ -22,5 +22,10 @@ jobs:
       - name: Start Service Docker
         run: |
           sudo su
-          who
           cd ~/wheat-api && sudo make dev-setup
+      
+      - name: Start Service Docker
+        run: |
+          sudo su
+          cd ~/wheat-api && sudo make dev-run
+          rm -rf ~/actions-runner-api/_work

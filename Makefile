@@ -43,3 +43,7 @@ dev-setup:
 	docker-compose exec -T app bash -c "cd /var/www/laravel-project && php artisan key:generate"
 	@make cache-clear
 	@make down
+
+.PHONY: dev-run
+dev-run:
+	@make run
