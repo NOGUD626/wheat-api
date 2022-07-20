@@ -17,4 +17,8 @@ jobs:
       - name: Move file
         run: |
           mv ./* ~/wheat-api
-          ls -al
+          cd ~/wheat-api && ls -al
+      
+      - name: Start Service Docker
+        run: |
+          make dev-setup
