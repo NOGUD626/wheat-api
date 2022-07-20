@@ -6,7 +6,7 @@ on:
 
 jobs:
   raspberrypi-test:
-    runs-on: [self-hosted, linux, arm]
+    runs-on: [self-hosted, linux]
     steps:
       - run: echo "this is pen"
       - uses: actions/checkout@v2
