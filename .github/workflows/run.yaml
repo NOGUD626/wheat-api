@@ -14,13 +14,13 @@ jobs:
         run: |
           rm -rf ~/wheat-api/*
 
-      # - name: Move file
-      #   run: |
-      #     mv ./* ~/wheat-api
-      #     cd ~/wheat-api && ls -al
+      - name: Move file
+        run: |
+          cp -R ~/actions-runner-api/_work/wheat-api/wheat-api  ~/
+          cd ~/wheat-api && ls -al
       
       - name: Start Service Docker
         run: |
           sudo su
           who
-          make dev-setup
+          cd ~/wheat-api && sudo make dev-setup
