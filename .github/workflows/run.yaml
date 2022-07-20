@@ -1,4 +1,4 @@
-name: Raspberrypi-github-actions
+name: Wheat-api-deploy
 
 on:
   push:
@@ -8,6 +8,13 @@ jobs:
   raspberrypi-test:
     runs-on: [self-hosted, linux]
     steps:
-      - run: echo "this is pen"
       - uses: actions/checkout@v2
-      - run: pwd
+
+      - name: folder remove content
+        run: |
+          rm -rf ~/wheat-api/*
+
+      - name: Move file
+        run: |
+          mv ./* ~/wheat-api
+          ls -al
