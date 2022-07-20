@@ -12,7 +12,7 @@ jobs:
 
       - name: folder remove content
         run: |
-          rm -rf ~/wheat-api/*
+          sudo rm -rf ~/wheat-api/*
 
       - name: Move file
         run: |
