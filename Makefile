@@ -49,3 +49,10 @@ dev-setup:
 .PHONY: dev-run
 dev-run:
 	docker-compose up -d nginx
+
+.PHONY: dev-stop
+dev-stop:
+	docker stop nginx
+	docker stop app
+	docker rm -f `docker ps -a -q`
+	docker rmi `docker images -q`

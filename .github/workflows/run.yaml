@@ -15,6 +15,10 @@ jobs:
           sudo rm -rf ~/wheat-api
           mkdir ~/wheat-api
 
+      - name: docker clean task
+        run: |
+          sudo make dev-stop
+
       - name: Move file
         run: |
           cp -R ~/actions-runner-api/_work/wheat-api/wheat-api  ~/
