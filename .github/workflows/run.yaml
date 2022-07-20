@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  raspberrypi-test:
+  wheat-api-deploy:
     runs-on: [self-hosted, linux]
     steps:
       - uses: actions/checkout@v2
