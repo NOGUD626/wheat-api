@@ -42,5 +42,4 @@ dev-setup:
 	docker-compose exec app bash -c "cd /var/www/laravel-project && php -r \"copy('.env.dev_example', '.env');\""
 	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan key:generate"
 	@make cache-clear
-	@make migration
 	@make down

@@ -1,0 +1,13 @@
+name: Raspberrypi-github-actions
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  raspberrypi-test:
+    runs-on: [self-hosted, linux, arm]
+    steps:
+      - run: echo "this is pen"
+      - uses: actions/checkout@v2
+      - run: pwd
