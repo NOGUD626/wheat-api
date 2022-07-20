@@ -46,4 +46,4 @@ dev-setup:
 
 .PHONY: dev-run
 dev-run:
-	@make run
+	docker-compose up -d nginx
