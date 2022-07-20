@@ -12,11 +12,11 @@ jobs:
 
       - name: folder remove content
         run: |
-          sudo rm -rf ~/wheat-api/*
+          sudo rm -rf ~/wheat-api
+          mkdir ~/wheat-api
 
       - name: Move file
         run: |
-          sudo su
           cp -R ~/actions-runner-api/_work/wheat-api/wheat-api  ~/
           cd ~/wheat-api && ls -al
       
