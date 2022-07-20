@@ -36,6 +36,8 @@ migration:
 
 .PHONY: dev-setup
 dev-setup:
+	docker-compose build app
+	docker-compose build nginx
 	docker-compose up -d app
 	docker-compose up -d nginx
 	docker-compose exec -T app bash -c "cd /var/www/laravel-project && composer install"
