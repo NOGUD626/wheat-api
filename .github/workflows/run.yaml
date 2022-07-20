@@ -21,4 +21,4 @@ jobs:
       
       - name: Start Service Docker
         run: |
-          make dev-setup
+          sudo make dev-setup
