@@ -27,6 +27,7 @@ jobs:
       - name: build  Docker Image
         run: |
           sudo su
+          chmod 777 -R ~/wheat-api
           cd ~/wheat-api && sudo make dev-setup
       
       - name: Start Service Docker
