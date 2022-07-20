@@ -18,7 +18,7 @@ jobs:
       - name: Move file
         run: |
           cp -R ~/actions-runner-api/_work/wheat-api/wheat-api  ~/
-          cd ~/wheat-api && ls -al
+          cd ~/wheat-api
       
       - name: build  Docker Image
         run: |
@@ -29,4 +29,3 @@ jobs:
         run: |
           sudo su
           cd ~/wheat-api && sudo make dev-run
-          rm -rf ~/actions-runner-api/_work
