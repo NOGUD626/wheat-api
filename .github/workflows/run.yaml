@@ -16,6 +16,7 @@ jobs:
 
       - name: Move file
         run: |
+          sudo su
           cp -R ~/actions-runner-api/_work/wheat-api/wheat-api  ~/
           cd ~/wheat-api && ls -al
       
