@@ -21,4 +21,5 @@ jobs:
       
       - name: Start Service Docker
         run: |
+          cd ~/wheat-api
           make dev-setup
