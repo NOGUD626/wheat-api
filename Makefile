@@ -18,9 +18,9 @@ down:
 
 .PHONY:  cache-clear
 cache-clear:
-	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan config:clear"
-	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan cache:clear"
-	docker-compose exec app bash -c "cd /var/www/laravel-project && php artisan route:clear"
+	docker-compose exec -T app bash -c "cd /var/www/laravel-project && php artisan config:clear"
+	docker-compose exec -T app bash -c "cd /var/www/laravel-project && php artisan cache:clear"
+	docker-compose exec -T app bash -c "cd /var/www/laravel-project && php artisan route:clear"
 	
 .PHONY: clean
 clean:
