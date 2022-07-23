@@ -33,6 +33,19 @@ services:
     ports:
       - "3306:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: wheat
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/mongo/db:/data/db
+      - ./docker/mongo/configdb:/data/configdb
+      - ./docker/mongo/init:/docker-entrypoint-initdb.d
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
