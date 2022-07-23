@@ -10,4 +10,4 @@ var user = {
   };
   
   db.createUser(user);
-  db.createCollection('staffs');
+  db.createCollection('form');
