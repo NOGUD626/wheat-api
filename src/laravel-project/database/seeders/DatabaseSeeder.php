@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'from' => 'Jane Doe',
             'message' => 'Hi John',
         ]));
+        
         // $this->call(RolesTableSeeder::class);
         // $this->call(StatusTypeTableSeeder::class);
         // $this->call(UsersTableSeeder::class);
