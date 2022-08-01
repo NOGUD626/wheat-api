@@ -16,12 +16,12 @@ class StaffTableSeeder extends Seeder
     {
         $staff = array(
             [
-                'company_id'=> 1,
-                'user_id'=> 1,
+                'company_id'=> 'C-62e74c9ad22ad',
+                'user_id'=> 'U-62e74a8b33397',
             ],
             [
-                'company_id'=> 2,
-                'user_id'=> 1,
+                'company_id'=> 'C-62e74c9ad22b0',
+                'user_id'=> 'U-62e74a8b33397',
             ]
         );
 

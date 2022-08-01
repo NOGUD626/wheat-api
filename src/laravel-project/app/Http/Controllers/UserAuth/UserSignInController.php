@@ -27,6 +27,7 @@ class UserSignInController extends Controller
         if ($user->get()->isEmpty()) {
 
             $user = new User();
+            $user->id = uniqid('U-');
             $user->name = $name;
             $user->firebase_id = $firebaseId;
             $user->email = $email;

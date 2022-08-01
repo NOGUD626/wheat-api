@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = array(
             [
+                'id' => 'U-62e74a8b33397',
                 'name'=> '野口大輝',
                 'firebase_id'=> '0yOujnPA6wMCvxhRu5F6HOAXxFq2',
                 'email'=> 'noguchi@nogu-lab.com',
