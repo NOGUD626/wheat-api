@@ -10,7 +10,7 @@ class ComponeyListModel
     protected $createdAt;
 
     public function __construct(
-        ?int $companyId,
+        ?string $companyId,
         string $companyName,
         string $companyAddress,
         string $createdAt
@@ -22,9 +22,9 @@ class ComponeyListModel
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getCompanyId(): ?int
+    public function getCompanyId(): ?string
     {
         return $this->companyId;
     }

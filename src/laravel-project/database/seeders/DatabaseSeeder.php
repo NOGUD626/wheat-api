@@ -14,17 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $form = DB::connection('mongodb')->collection('form');
-        dd($form->insert([
-            'from' => 'Jane Doe',
-            'message' => 'Hi John',
-        ]));
+        // $form = DB::connection('mongodb')->collection('form');
+        // dd($form->insert([
+        //     'from' => 'Jane Doe',
+        //     'message' => 'Hi John',
+        // ]));
         
-        // $this->call(RolesTableSeeder::class);
-        // $this->call(StatusTypeTableSeeder::class);
-        // $this->call(UsersTableSeeder::class);
-        // $this->call(CompaniesTableSeeder::class); 
-        // $this->call(StaffTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(StatusTypeTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(CompaniesTableSeeder::class); 
+        $this->call(StaffTableSeeder::class);
 
     }
 }

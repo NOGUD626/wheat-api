@@ -15,9 +15,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); # 自動インクリメントするBIGINT型カラムを生成
+            $table->string('id')->unique('id');
             $table->char('name', 30);
-            $table->string('uid', 128);
+            $table->string('firebase_id', 128);
             $table->string('email', 50);
             $table->string('line_id', 128)->nullable();
             $table->bigInteger('role_id')->unsigned();

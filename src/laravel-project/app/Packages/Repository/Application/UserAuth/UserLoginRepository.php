@@ -11,7 +11,7 @@ class UserLoginRepository implements UserLoginRepositoryInterface
     public function getExistUser(String $firebaseId): bool
     {
         $excistFlag = DB::table('users')
-            ->where('uid', $firebaseId)
+            ->where('firebase_id', $firebaseId)
             ->exists();
 
         return $excistFlag;
@@ -23,7 +23,7 @@ class UserLoginRepository implements UserLoginRepositoryInterface
             ->leftjoin('users', 'staff.user_id', '=', 'users.id')
             ->leftjoin('companies', 'staff.company_id', '=', 'companies.id')
             ->leftjoin('status_type', 'status_type.id', '=', 'companies.status_id')
-            ->where('users.uid', $firebaseId)
+            ->where('users.firebase_id', $firebaseId)
             ->where('status_type.flag', true)
             ->select('companies.id', 'companies.name', 'companies.address', 'companies.created_at')
             ->get()->toArray();
@@ -43,14 +43,14 @@ class UserLoginRepository implements UserLoginRepositoryInterface
 
     public function getUser(String $firebaseId): User
     {
-        $user = User::where('uid', '=', $firebaseId)->first();
+        $user = User::where('firebase_id', '=', $firebaseId)->first();
 
         return $user;
     }
 
     public function getAbility(String $firebaseId): array
     {
-        $user_str = User::where('uid', '=', $firebaseId)->first()->role->grant;
+        $user_str = User::where('firebase_id', '=', $firebaseId)->first()->role->grant;
         $role = explode(',', $user_str);
         return $role;
     }

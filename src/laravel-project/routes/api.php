@@ -21,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware(['firebase'])->group(function (){
-    Route::post('/sighin', UserSignInController::class);
+    Route::post('/signin', UserSignInController::class);
     Route::post('/login', UserLoginController::class);
 });

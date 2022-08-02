@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'name',
-        'uid',
+        'firebase_id',
         'email'
     ];
 
@@ -48,4 +48,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 }
