@@ -16,8 +16,14 @@ use App\Http\Controllers\UserAuth\UserLoginController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum'] ], function () {
+    Route::get('/', function (Request $request) {
+        return $request->user();
+    });
 });
 
 Route::middleware(['firebase'])->group(function (){
