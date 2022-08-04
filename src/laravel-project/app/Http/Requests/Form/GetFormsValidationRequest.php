@@ -26,7 +26,7 @@ class GetFormsValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            "companyId" => ['required', 'regex:/^(C\-)+(\w){13}$/'],
+            'companyId' => ['required', 'regex:/^(C\-)+(\w){13}$/'],
         ];
     }
 

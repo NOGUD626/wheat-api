@@ -35,13 +35,11 @@ class DeleteFormController extends Controller
         $companyId = $request->companyId;
         $formId = $request->formId;
 
-        $status = $this->formSchemaService->deleteFormSchemaDataList($formId,  $companyId,  $userId);
+        $this->formSchemaService->deleteFormSchemaData($formId,  $companyId,  $userId);
 
         return response()->json(
-            [
-                'status' => $status ? "success" : "failed",
-            ],
-            $status ? Response::HTTP_NO_CONTENT : Response::HTTP_FORBIDDEN
+            [],
+            Response::HTTP_NO_CONTENT
         );
     }
 }

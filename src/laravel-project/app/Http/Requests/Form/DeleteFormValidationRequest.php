@@ -16,7 +16,7 @@ class DeleteFormValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            "formId" => ['required', 'regex:/^(FM\-)+(\w){13}$/'],
+            'formId' => ['required', 'regex:/^(FM\-)+(\w){13}$/'],
             'companyId' => ['required', 'regex:/^(C\-)+(\w){13}$/']
         ];
     }
