@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Forms;
 
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\Form\PostFormValidationRequest;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Packages\Service\Model\Form\PostFormSchemaModel;
-use App\Http\Controllers\Controller;
 use App\Packages\Service\Application\Form\FormSchemaServiceInterface;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Form\DeleteFormValidationRequest;
 
-class PostFormController extends Controller
+class DeleteFormController extends Controller
 {
 
     public function __construct(
@@ -18,11 +18,12 @@ class PostFormController extends Controller
         $this->formSchemaService = $formSchemaService;
     }
 
-    public function __invoke(PostFormValidationRequest $request): JsonResponse
+    public function __invoke(DeleteFormValidationRequest $request): JsonResponse
     {
         $user = $request->user();
+        $userId = $user->id;
 
-        if (!$user->tokenCan('form/write')) {
+        if (!$user->tokenCan('form/delete')) {
             return response()->json(
                 [
                     'message' => 'not permission',
@@ -31,27 +32,16 @@ class PostFormController extends Controller
             );
         }
 
-        $title = $request->title;
-        $comment = $request->comment;
-        $schema = $request->schema;
         $companyId = $request->companyId;
-        $userId = $user->id;
+        $formId = $request->formId;
 
-        $postFormData = new PostFormSchemaModel(
-            $companyId,
-            $title,
-            $comment,
-            $schema,
-            $userId
-        );
-
-        $status = $this->formSchemaService->postFormSchemaData($postFormData);
+        $status = $this->formSchemaService->deleteFormSchemaDataList($formId,  $companyId,  $userId);
 
         return response()->json(
             [
                 'status' => $status ? "success" : "failed",
             ],
-            $status ? Response::HTTP_CREATED : Response::HTTP_FORBIDDEN
+            $status ? Response::HTTP_NO_CONTENT : Response::HTTP_FORBIDDEN
         );
     }
 }
