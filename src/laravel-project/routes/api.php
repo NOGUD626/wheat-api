@@ -4,9 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuth\UserSignInController;
 use App\Http\Controllers\UserAuth\UserLoginController;
-use App\Http\Controllers\Forms\FormGetController;
-use App\Http\Controllers\Forms\FormPostController;
-use App\Http\Controllers\Forms\FormDeleteController;
+use App\Http\Controllers\Forms\GetFormSchemaController;
+use App\Http\Controllers\Forms\GetAllFormSchemaController;
+use App\Http\Controllers\Forms\PostFormController;
+use App\Http\Controllers\Forms\DeleteFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,8 @@ Route::middleware(['firebase'])->group(function (){
 });
 
 Route::group(['prefix' => 'forms', 'middleware' => ['auth:sanctum'] ], function () {
-    Route::get('/', FormGetController::class);
-    Route::post('/', FormPostController::class);
-    Route::delete('/', FormDeleteController::class);
+    Route::get('/', GetFormSchemaController::class);
+    Route::get('/{companyId}', GetAllFormSchemaController::class);
+    Route::post('/', PostFormController::class);
+    Route::delete('/', DeleteFormController::class);
 });
