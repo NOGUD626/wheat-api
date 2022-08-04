@@ -26,8 +26,17 @@ interface FormSchemaServiceInterface
     /**
      * FormのSchemaデータを登録する
      * @param PostFormSchemaModel 登録するフォームスキマー情報
-     * @return void
+     * @return bool
      * 
      */
     public function postFormSchemaData(PostFormSchemaModel $postFormSchemaModel): bool;
+
+    /**
+     * FormのSchemaデータを削除する
+     * @param string formId
+     * @param string companyId
+     * @param string userId
+     * @return void
+     */
+    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool;
 }

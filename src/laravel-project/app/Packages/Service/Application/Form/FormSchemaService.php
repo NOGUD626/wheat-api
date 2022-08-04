@@ -64,4 +64,9 @@ class FormSchemaService implements FormSchemaServiceInterface
             )
         );
     }
+
+    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool
+    {
+        return $this->formSchemaRepository->deleteFormSchemaDataList($formId, $companyId,  $userId);
+    }
 }
