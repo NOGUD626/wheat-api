@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Forms;
 
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use App\Http\Requests\Form\FormsAPIValidationRequest;
+use App\Http\Requests\Form\GetFormsValidationRequest;
 use App\Http\Controllers\Controller;
 use App\Packages\Service\Application\Form\FormSchemaServiceInterface;
 use App\Packages\Service\Model\Form\FormSchemaModel;
@@ -19,7 +19,7 @@ class GetAllFormSchemaController extends Controller
         $this->formSchemaService = $formSchemaService;
     }
 
-    public function __invoke(FormsAPIValidationRequest $request): JsonResponse
+    public function __invoke(GetFormsValidationRequest $request): JsonResponse
     {
         $user = $request->user();
         $userId = $user->id;
