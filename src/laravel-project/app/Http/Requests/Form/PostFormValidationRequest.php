@@ -8,22 +8,12 @@ use Illuminate\Contracts\Validation\Validator;
 
 class PostFormValidationRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     * https://zenn.dev/moroshi/articles/56d02e4b9cabe0
-     */
     public function rules()
     {
         return [
@@ -34,11 +24,6 @@ class PostFormValidationRequest extends FormRequest
         ];
     }
 
-    /**
-     *
-     * @param Validator $validator
-     * @return HttpResponseException
-     */
     protected function failedValidation(Validator $validator): void
     {
         $response = response()->json([
