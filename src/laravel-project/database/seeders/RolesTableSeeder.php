@@ -19,7 +19,8 @@ class RolesTableSeeder extends Seeder
             'user/write',
             'form/read',
             'form/write',
-            'form/delete'
+            'form/delete',
+            'form/update'
         ];
         $developer_csv = implode(',', $developer);
 
@@ -28,7 +29,8 @@ class RolesTableSeeder extends Seeder
             'user/write',
             'form/read',
             'form/write',
-            'form/delete'
+            'form/delete',
+            'form/update'
         ];
         $admin_csv = implode(',', $admin);
 
