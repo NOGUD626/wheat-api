@@ -4,6 +4,7 @@ namespace App\Packages\Repository\Application\Form;
 
 use App\Packages\Repository\Model\Form\FormSchemaModel;
 use App\Packages\Repository\Model\Form\PostFormSchemaModel;
+use App\Packages\Repository\Model\Form\PutFormSchemaModel;
 
 interface FormSchemaRepositoryInterface
 {
@@ -38,5 +39,12 @@ interface FormSchemaRepositoryInterface
      * @param string userId
      * @return void
      */
-    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool;
+    public function deleteFormSchemaData(String $formId, String $companyId, String $userId): void;
+
+    /**
+     * FormのSchemaデータを更新する
+     * @param string formId
+     * @return void
+     */
+    public function putFormSchemaData(PutFormSchemaModel $putFormSchemaModel): void;
 }

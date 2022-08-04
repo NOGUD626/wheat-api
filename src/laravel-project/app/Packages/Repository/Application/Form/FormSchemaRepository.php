@@ -5,7 +5,7 @@ namespace App\Packages\Repository\Application\Form;
 use Illuminate\Support\Facades\DB;
 use App\Packages\Repository\Model\Form\FormSchemaModel;
 use App\Packages\Repository\Model\Form\PostFormSchemaModel;
-use phpDocumentor\Reflection\Types\Boolean;
+use App\Packages\Repository\Model\Form\PutFormSchemaModel;
 
 class FormSchemaRepository implements FormSchemaRepositoryInterface
 {
@@ -91,7 +91,7 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
         return true;
     }
 
-    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool
+    public function deleteFormSchemaData(String $formId, String $companyId, String $userId): void
     {
         DB::table('forms')
             ->leftjoin('companies', 'forms.company_id', '=', 'companies.id')
@@ -105,7 +105,28 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             ->collection('form')
             ->where('id', $formId)
             ->delete();
-            
-        return true;
+
+    }
+
+    public function putFormSchemaData(PutFormSchemaModel $putFormSchemaModel): void
+    {
+        DB::table('forms')
+            ->leftjoin('companies', 'forms.company_id', '=', 'companies.id')
+            ->leftjoin('staff', 'forms.company_id', '=', 'staff.company_id')
+            ->where('staff.user_id', $putFormSchemaModel->getUserId())
+            ->where('forms.id', $putFormSchemaModel->getFormId())
+            ->where('forms.company_id', $putFormSchemaModel->getCompanyId())
+            ->update([
+                'title' => $putFormSchemaModel->getFormTitle(),
+                'created_by' => $putFormSchemaModel->getUserId(),
+                'comment' => $putFormSchemaModel->getFormComment()
+            ]);
+
+        DB::connection('mongodb')
+            ->collection('form')
+            ->where('id', $putFormSchemaModel->getFormId())
+            ->update([
+                'content' => $putFormSchemaModel->getFormSchema()
+            ]);
     }
 }
