@@ -4,6 +4,8 @@ namespace App\Packages\Repository\Application\Form;
 
 use Illuminate\Support\Facades\DB;
 use App\Packages\Repository\Model\Form\FormSchemaModel;
+use App\Packages\Repository\Model\Form\PostFormSchemaModel;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class FormSchemaRepository implements FormSchemaRepositoryInterface
 {
@@ -17,7 +19,7 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             ->where('forms.id', $formId)
             ->select('forms.id', 'forms.title', 'forms.comment', 'forms.created_at', 'forms.updated_at')
             ->first();
-            
+
         return new FormSchemaModel(
             $formSchemaInfoData->id,
             $formSchemaInfoData->title,
@@ -60,5 +62,34 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             ->first();
 
         return $formSchemaData["content"];
+    }
+
+    public function postFormSchemaData(PostFormSchemaModel $postFormSchemaModel): bool
+    {
+        if (
+            DB::table('forms')
+            ->leftjoin('companies', 'forms.company_id', '=', 'companies.id')
+            ->leftjoin('staff', 'forms.company_id', '=', 'staff.company_id')
+            ->where('staff.company_id', $postFormSchemaModel->getCompanyId())
+            ->where('staff.user_id', $postFormSchemaModel->getUserId())
+            ->doesntExist()
+        ) {
+            return false;
+        }
+
+        DB::table('forms')->insert([
+            'id' => $postFormSchemaModel->getFormId(),
+            'title' => $postFormSchemaModel->getFormTitle(),
+            'created_by' => $postFormSchemaModel->getUserId(),
+            'company_id' => $postFormSchemaModel->getCompanyId(),
+            'comment' => $postFormSchemaModel->getFormComment(),
+        ]);
+
+        DB::connection('mongodb')->collection('form')->insert([
+            'id' => $postFormSchemaModel->getFormId(),
+            'content' => $postFormSchemaModel->getFormSchema()
+        ]);
+
+        return true;
     }
 }
