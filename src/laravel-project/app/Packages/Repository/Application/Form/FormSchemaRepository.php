@@ -19,7 +19,6 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             ->where('forms.id', $formId)
             ->select('forms.id', 'forms.title', 'forms.comment', 'forms.created_at', 'forms.updated_at')
             ->first();
-
         return new FormSchemaModel(
             $formSchemaInfoData->id,
             $formSchemaInfoData->title,
@@ -39,7 +38,6 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             ->where('staff.user_id', $userId)
             ->select('forms.id', 'forms.title', 'forms.comment', 'forms.created_at', 'forms.updated_at')
             ->get()->toArray();
-
         return array_map(
             function ($formSchemaInfoData): FormSchemaModel {
                 return new FormSchemaModel(
@@ -90,6 +88,24 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             'content' => $postFormSchemaModel->getFormSchema()
         ]);
 
+        return true;
+    }
+
+    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool
+    {
+        DB::table('forms')
+            ->leftjoin('companies', 'forms.company_id', '=', 'companies.id')
+            ->leftjoin('staff', 'forms.company_id', '=', 'staff.company_id')
+            ->where('staff.user_id', $userId)
+            ->where('forms.id', $formId)
+            ->where('forms.company_id', $companyId)
+            ->delete();
+
+        DB::connection('mongodb')
+            ->collection('form')
+            ->where('id', $formId)
+            ->delete();
+            
         return true;
     }
 }
