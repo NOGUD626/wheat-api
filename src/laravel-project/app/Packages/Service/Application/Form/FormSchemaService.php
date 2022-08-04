@@ -5,6 +5,8 @@ namespace App\Packages\Service\Application\Form;
 use App\Packages\Repository\Application\Form\FormSchemaRepositoryInterface;
 use App\Packages\Service\Model\Form\FormSchemaModel;
 use App\Packages\Repository\Model\Form\FormSchemaModel as FormSchemaRepositoryModel;
+use App\Packages\Service\Model\Form\PostFormSchemaModel;
+use App\Packages\Repository\Model\Form\PostFormSchemaModel as PostFormSchemaRepositoryModel;
 
 class FormSchemaService implements FormSchemaServiceInterface
 {
@@ -46,6 +48,20 @@ class FormSchemaService implements FormSchemaServiceInterface
                 );
             },
             $formSchemaDataList
+        );
+    }
+
+    public function postFormSchemaData(PostFormSchemaModel $postFormSchemaModel): bool
+    {
+        return $this->formSchemaRepository->postFormSchemaData(
+            new PostFormSchemaRepositoryModel(
+                $postFormSchemaModel->getCompanyId(),
+                $postFormSchemaModel->getFormTitle(),
+                $postFormSchemaModel->getFormComment(),
+                $postFormSchemaModel->getFormSchema(),
+                $postFormSchemaModel->getUserId(),
+                uniqid('FM-'),
+            )
         );
     }
 }

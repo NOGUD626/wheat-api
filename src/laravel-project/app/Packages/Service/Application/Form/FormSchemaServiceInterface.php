@@ -3,6 +3,7 @@
 namespace App\Packages\Service\Application\Form;
 
 use App\Packages\Service\Model\Form\FormSchemaModel;
+use App\Packages\Service\Model\Form\PostFormSchemaModel;
 
 interface FormSchemaServiceInterface
 {
@@ -21,4 +22,12 @@ interface FormSchemaServiceInterface
      * @return array フォームのスキーマデータのリスト
      */
     public function getFormSchemaDataList(String $companyId, String $userId): array;
+
+    /**
+     * FormのSchemaデータを登録する
+     * @param PostFormSchemaModel 登録するフォームスキマー情報
+     * @return void
+     * 
+     */
+    public function postFormSchemaData(PostFormSchemaModel $postFormSchemaModel): bool;
 }

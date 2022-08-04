@@ -2,37 +2,34 @@
 
 namespace App\Packages\Service\Model\Form;
 
-class FormSchemaModel
+class PostFormSchemaModel
 {
     protected $formId;
     protected $formTitle;
     protected $formComment;
-    protected $createdAt;
-    protected $updatedAt;
     protected $formSchema;
+    protected $userId;
 
     public function __construct(
-        ?string $formId,
+        string $companyId,
         string $formTitle,
-        string $formComment,
+        ?string $formComment,
         array $formSchema,
-        string $createdAt,
-        string $updatedAt
-    ) {
-        $this->formId=$formId;
+        string $userId,
+    ){
+        $this->companyId=$companyId;
         $this->formTitle=$formTitle;
         $this->formComment=$formComment;
         $this->formSchema=$formSchema;
-        $this->createdAt=$createdAt;
-        $this->updatedAt=$updatedAt;
+        $this->userId=$userId;
     }
 
     /**
      * @return string|null
      */
-    public function getFormId(): ?string
+    public function getCompanyId(): ?string
     {
-        return $this->formId;
+        return $this->companyId;
     }
 
     /**
@@ -52,26 +49,18 @@ class FormSchemaModel
     }
 
     /**
-     * @return string|null
-     */
-    public function getCreatedAt(): ?string
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUpdatedAt(): ?string
-    {
-        return $this->updatedAt;
-    }
-
-    /**
      * @return array
      */
     public function getFormSchema(): array
     {
         return $this->formSchema;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUserId(): string
+    {
+        return $this->userId;
     }
 }
