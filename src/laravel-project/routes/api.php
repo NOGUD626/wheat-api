@@ -8,6 +8,7 @@ use App\Http\Controllers\Forms\GetFormSchemaController;
 use App\Http\Controllers\Forms\GetAllFormSchemaController;
 use App\Http\Controllers\Forms\PostFormController;
 use App\Http\Controllers\Forms\DeleteFormController;
+use App\Http\Controllers\Forms\PutFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,5 @@ Route::group(['prefix' => 'forms', 'middleware' => ['auth:sanctum'] ], function 
     Route::get('/{companyId}', GetAllFormSchemaController::class);
     Route::post('/', PostFormController::class);
     Route::delete('/', DeleteFormController::class);
+    Route::put('/', PutFormController::class);
 });
