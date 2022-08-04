@@ -4,6 +4,7 @@ namespace App\Packages\Service\Application\Form;
 
 use App\Packages\Service\Model\Form\FormSchemaModel;
 use App\Packages\Service\Model\Form\PostFormSchemaModel;
+use App\Packages\Service\Model\Form\PutFormSchemaModel;
 
 interface FormSchemaServiceInterface
 {
@@ -36,7 +37,14 @@ interface FormSchemaServiceInterface
      * @param string formId
      * @param string companyId
      * @param string userId
-     * @return void
+     * @return bool
      */
-    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool;
+    public function deleteFormSchemaData(String $formId, String $companyId, String $userId): void;
+
+    /**
+     * FormのSchemaデータを更新する
+     * @param PutFormSchemaModel 更新するフォームスキマー情報
+     * @return bool
+     */
+    public function putFormSchemaData(PutFormSchemaModel $putFormSchemaModel): void;
 }

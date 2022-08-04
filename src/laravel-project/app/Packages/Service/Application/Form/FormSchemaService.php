@@ -7,6 +7,8 @@ use App\Packages\Service\Model\Form\FormSchemaModel;
 use App\Packages\Repository\Model\Form\FormSchemaModel as FormSchemaRepositoryModel;
 use App\Packages\Service\Model\Form\PostFormSchemaModel;
 use App\Packages\Repository\Model\Form\PostFormSchemaModel as PostFormSchemaRepositoryModel;
+use App\Packages\Service\Model\Form\PutFormSchemaModel;
+use App\Packages\Repository\Model\Form\PutFormSchemaModel as PutFormSchemaRepositoryModel;
 
 class FormSchemaService implements FormSchemaServiceInterface
 {
@@ -65,8 +67,22 @@ class FormSchemaService implements FormSchemaServiceInterface
         );
     }
 
-    public function deleteFormSchemaDataList(String $formId, String $companyId, String $userId): bool
+    public function deleteFormSchemaData(String $formId, String $companyId, String $userId): void
     {
-        return $this->formSchemaRepository->deleteFormSchemaDataList($formId, $companyId,  $userId);
+        $this->formSchemaRepository->deleteFormSchemaData($formId, $companyId,  $userId);
+    }
+
+    public function putFormSchemaData(PutFormSchemaModel $putFormSchemaModel): void
+    {
+        $this->formSchemaRepository->putFormSchemaData(
+            new PutFormSchemaRepositoryModel(
+                $putFormSchemaModel->getCompanyId(),
+                $putFormSchemaModel->getFormTitle(),
+                $putFormSchemaModel->getFormComment(),
+                $putFormSchemaModel->getFormSchema(),
+                $putFormSchemaModel->getUserId(),
+                $putFormSchemaModel->getFormId()
+            )
+        );
     }
 }

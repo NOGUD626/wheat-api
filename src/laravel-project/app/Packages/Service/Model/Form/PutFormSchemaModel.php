@@ -2,26 +2,29 @@
 
 namespace App\Packages\Service\Model\Form;
 
-class PostFormSchemaModel
+class PutFormSchemaModel
 {
     protected $companyId;
     protected $formTitle;
     protected $formComment;
     protected $formSchema;
     protected $userId;
+    protected $formId;
 
     public function __construct(
         string $companyId,
         string $formTitle,
         ?string $formComment,
         array $formSchema,
-        string $userId
+        string $userId,
+        string $formId
     ){
         $this->companyId=$companyId;
         $this->formTitle=$formTitle;
         $this->formComment=$formComment;
         $this->formSchema=$formSchema;
         $this->userId=$userId;
+        $this->formId=$formId;
     }
 
     /**
@@ -57,10 +60,18 @@ class PostFormSchemaModel
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getUserId(): string
     {
         return $this->userId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormId(): string
+    {
+        return $this->formId;
     }
 }
