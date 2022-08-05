@@ -90,6 +90,8 @@ class LineBotConfigurationService implements LineBotConfigurationServiceInterfac
                     //友達登録＆ブロック解除
                 case $event instanceof LINEBot\Event\FollowEvent:
                     break;
+                case $event instanceof LINEBot\Event\UnfollowEvent:
+                    break;
                     //メッセージの受信
                 case $event instanceof LINEBot\Event\MessageEvent\TextMessage:
                     $this->LineBotMessageEventProcess($bot, $event);
@@ -114,7 +116,7 @@ class LineBotConfigurationService implements LineBotConfigurationServiceInterfac
     {
         $mesage = $event->getText();
         $reply_token = $event->getReplyToken();
-        
+
         $bot->replyText($reply_token, $mesage);
     }
 }
