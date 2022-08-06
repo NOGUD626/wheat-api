@@ -6,11 +6,6 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
         $this->call(RolesTableSeeder::class);
@@ -18,5 +13,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(CompaniesTableSeeder::class); 
         $this->call(StaffTableSeeder::class);
+        $this->call(FormsTableSeeder::class);
+        $this->call(LinebotConfigTableSeeder::class);
     }
 }

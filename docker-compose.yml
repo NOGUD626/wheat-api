@@ -24,15 +24,26 @@ services:
       MYSQL_DATABASE: wheat
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
-      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
       TZ: 'Asia/Tokyo'
     volumes:
       - ./docker/db/data:/var/lib/mysql  
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: wheat
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker/mongo/db:/data/db
+      - ./docker/mongo/configdb:/data/configdb
+      - ./docker/mongo/init:/docker-entrypoint-initdb.d
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:

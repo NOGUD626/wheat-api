@@ -22,13 +22,14 @@ class UserSignInController extends Controller
         $email = $request->email;
         $name = $request->name;
 
-        $user = User::where('uid', $firebaseId);
+        $user = User::where('firebase_id', $firebaseId);
 
         if ($user->get()->isEmpty()) {
 
             $user = new User();
+            $user->id = uniqid('U-');
             $user->name = $name;
-            $user->uid = $firebaseId;
+            $user->firebase_id = $firebaseId;
             $user->email = $email;
             $user->role_id = 1;
             $user->status_id = 1;
