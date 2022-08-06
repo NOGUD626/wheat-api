@@ -22,6 +22,14 @@ class UsersTableSeeder extends Seeder
                 'email'=> 'noguchi@nogu-lab.com',
                 'role_id'=> '1',
                 'status_id'=> '1',
+            ],
+            [
+                'id' => 'U-62ee84dd2944e',
+                'name'=> 'tsukasa kumeta',
+                'firebase_id'=> 'A09athBrMbTTsMRxz584VgVGZk93',
+                'email'=> 'kumeta@cps.im.dendai.ac.jp',
+                'role_id'=> '1',
+                'status_id'=> '1',
             ]
         );
 
