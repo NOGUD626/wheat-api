@@ -16,7 +16,22 @@ make setup
 make run
 ```
 
+# 開発環境
+Dockerから構成されているため基本的にDockerがインストールされていれば実行可能。
+
+```
+# Laravel プロジェクトの初期化 & DBマイグレーションとseed作成
+$ make setup
+
+# 起動
+$ make run
+
+# 停止
+$ make down
+```
+
 #　Git開発運用ルール
+
 開発にあたり以下のルールに沿って開発を行なっていく。
 
 ## コミット種別
