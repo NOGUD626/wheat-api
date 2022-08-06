@@ -14,10 +14,24 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $developer = ['user/read', 'user/write'];
+        $developer = [
+            'user/read',
+            'user/write',
+            'form/read',
+            'form/write',
+            'form/delete',
+            'form/update'
+        ];
         $developer_csv = implode(',', $developer);
 
-        $admin = ['user/read', 'user/write'];
+        $admin = [
+            'user/read', 
+            'user/write',
+            'form/read',
+            'form/write',
+            'form/delete',
+            'form/update'
+        ];
         $admin_csv = implode(',', $admin);
 
         $user = ['user/read'];

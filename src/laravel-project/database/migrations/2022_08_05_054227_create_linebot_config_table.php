@@ -3,21 +3,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
-class CreateStaffTable extends Migration
+class CreateLinebotConfigTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
+        Schema::create('linebot_config', function (Blueprint $table) {
             $table->id();
             $table->string('company_id');
-            $table->string('user_id');
+            $table->string('url_path', 20);
+            $table->string('channel_accecc_token');
+            $table->string('channel_secret', 50);
             $table->timestamp('created_at')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')
@@ -27,21 +23,11 @@ class CreateStaffTable extends Migration
                 ->references('id')
                 ->on('companies')
                 ->onDelete('cascade');
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('linebot_config');
     }
 }

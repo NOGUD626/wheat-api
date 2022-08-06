@@ -45,7 +45,6 @@ class UserLoginService implements UserLoginServiceInterface
         $role = $this->userLoginRepository->getAbility($firebaseId);
 
         $token = $user->createToken($firebaseId,$role)->plainTextToken;
-
         return $token;
     }
 }
