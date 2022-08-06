@@ -8,7 +8,6 @@ use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use Illuminate\Http\Request;
 use App\Packages\Repository\Application\LineBot\LineBotRepositoryInterface;
 use App\Packages\Service\Model\LineBot\LineBotSecretDataModel;
-use Illuminate\Support\Facades\Log;
 
 class LineBotConfigurationService implements LineBotConfigurationServiceInterface
 {

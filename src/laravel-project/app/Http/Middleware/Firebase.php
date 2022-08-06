@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Kreait\Firebase\Contract\Auth;
 use Kreait\Firebase\Exception\Auth\FailedToVerifyToken;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class Firebase
 {
@@ -21,8 +22,11 @@ class Firebase
 
         try {
             $verifiedIdToken = $this->auth->verifyIdToken($token);
-        } catch (FailedToVerifyToken $e) {
-            echo 'The token is invalid: ' . $e->getMessage();
+        } catch (FailedToVerifyToken $e) {;
+            $response = response()->json([
+                'status' => 'The token is invalid'
+            ], 401);
+            throw new HttpResponseException($response);
         }
 
         $firebaseId = $verifiedIdToken->claims()->get('sub');
