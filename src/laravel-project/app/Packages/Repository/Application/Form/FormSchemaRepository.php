@@ -66,8 +66,8 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
     {
         if (
             DB::table('forms')
-            ->leftjoin('companies', 'forms.company_id', '=', 'companies.id')
-            ->leftjoin('staff', 'forms.company_id', '=', 'staff.company_id')
+            ->leftjoin('users', 'users.id', '=', 'staff.user_id')
+            ->leftjoin('companies', 'companies.id', '=', 'staff.company_id')
             ->where('staff.company_id', $postFormSchemaModel->getCompanyId())
             ->where('staff.user_id', $postFormSchemaModel->getUserId())
             ->doesntExist()
@@ -105,7 +105,6 @@ class FormSchemaRepository implements FormSchemaRepositoryInterface
             ->collection('form')
             ->where('id', $formId)
             ->delete();
-
     }
 
     public function putFormSchemaData(PutFormSchemaModel $putFormSchemaModel): void
